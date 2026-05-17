@@ -11,7 +11,8 @@ import SwiftUI
 struct Couple_QuizApp: App {
     var body: some Scene {
         WindowGroup {
-            OnboardingView()
+           // OnboardingView()
+            PaywallView()
         }
     }
 }
