@@ -9,10 +9,24 @@ import SwiftUI
 
 @main
 struct Couple_QuizApp: App {
+
+    @StateObject private var router = AppRouter()
+
     var body: some Scene {
+
+        
         WindowGroup {
-           // OnboardingView()
-            PaywallView()
+            switch router.route {
+            case .paywall:
+                PaywallView()
+                    .environmentObject(router)
+            case .homePage:
+                HomeView()
+                    .environmentObject(router)
+            case .onboarding:
+            OnboardingView()
+                    .environmentObject(router)
+            }
         }
     }
 }

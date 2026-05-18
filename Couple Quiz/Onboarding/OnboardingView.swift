@@ -9,6 +9,8 @@ import SwiftUI
 
 struct OnboardingView: View {
 
+    @EnvironmentObject var router: AppRouter
+
     @State private var currentPage = 0
 
     private let pages: [OnboardingPage] = [
@@ -67,6 +69,7 @@ struct OnboardingView: View {
                 endPoint: .bottomTrailing
             )
             .ignoresSafeArea()
+
             Circle()
             .fill(pages[currentPage].glowColor.opacity(0.18))
             .frame(width: 420, height: 420)
@@ -99,7 +102,7 @@ struct OnboardingView: View {
                                 currentPage += 1
                             }
                         } else {
-                            print("Start App")
+                            router.showPaywall()
                         }
                     } label: {
                         Text(currentPage == pages.count - 1

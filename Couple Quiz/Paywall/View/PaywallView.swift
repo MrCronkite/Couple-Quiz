@@ -11,8 +11,11 @@ import SwiftUI
 // MARK: - Main PaywallView
 
 struct PaywallView: View {
-    @Environment(\.dismiss) private var dismiss
+
+    @State private var showCloseButton = false
     @State private var selectedPlanIndex: Int = 1
+
+    @EnvironmentObject var router: AppRouter
 
     private let plans: [PlanOption] = [
         PlanOption(
@@ -197,7 +200,7 @@ struct PaywallView: View {
                 HStack {
                     Spacer()
                     Button {
-                        dismiss()
+                        router.showMain()
                     } label: {
                         Text("✕")
                             .font(.system(size: 12, weight: .medium))
@@ -212,7 +215,15 @@ struct PaywallView: View {
                     .padding(.trailing, 18)
                 }
                 .padding(.top, 8)
+
                 Spacer()
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                    withAnimation {
+                        showCloseButton = true
+                    }
+                }
             }
         }
     }
