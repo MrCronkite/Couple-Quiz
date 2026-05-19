@@ -7,15 +7,34 @@
 
 import SwiftUI
 
-struct CategoryItem: Identifiable {
+//struct CategoryItem: Identifiable {
+//
+//    let id = UUID()
+//
+//    let emoji: String
+//    let title: String
+//    let subtitle: String
+//    let colors: [Color]
+//
+//    let isPremium: Bool
+//}
 
-    let id = UUID()
-
-    let emoji: String
-    let title: String
-    let subtitle: String
-    let colors: [Color]
-
-    let isPremium: Bool
-    let isSelected: Bool
+struct QuizData: Decodable {
+    let version: String
+    let categories: [Category]
 }
+
+struct Category: Decodable {
+    let id: String
+    let name: String
+    let emoji: String
+    let isPremium: Bool
+    let questions: [Question]
+}
+
+struct Question: Decodable {
+    let id: String
+    let text: String
+}
+
+

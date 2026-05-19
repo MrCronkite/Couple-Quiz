@@ -12,10 +12,10 @@ enum AppRoute {
     case onboarding
     case paywall
     case homePage
+    case questions(Category)
 }
 
 final class AppRouter: ObservableObject {
-
 
     @Published var route: AppRoute = .onboarding
 
@@ -25,6 +25,10 @@ final class AppRouter: ObservableObject {
 
     func showMain() {
         route = .homePage
+    }
+
+    func showQuestions(_ category: Category) {
+        route = .questions(category)
     }
 
 

@@ -26,6 +26,9 @@ struct Couple_QuizApp: App {
             case .onboarding:
             OnboardingView()
                     .environmentObject(router)
+            case .questions(let category):
+                QuestionsView(category: category)
+                    .environmentObject(router)
             }
         }
     }
