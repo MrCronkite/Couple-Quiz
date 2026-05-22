@@ -9,25 +9,15 @@ import SwiftUI
 
 struct QuestionsView: View {
 
-    @State private var currentIndex = 0
-    @State private var selectedReaction: ReactionType?
+    @StateObject private var vm: QuestionsViewModel
+
     @State private var emoji = ReactionType.randomEmoji
     @State private var showRules = false
 
-    let category: Category
-
     @EnvironmentObject var router: AppRouter
 
-    var questions: [Question] {
-        category.questions
-    }
-
-    var currentQuestion: Question {
-         questions[currentIndex]
-    }
-
-    var progress: CGFloat {
-        CGFloat(currentIndex + 1) / CGFloat(questions.count)
+    init(category: Category) {
+        _vm = StateObject(wrappedValue: QuestionsViewModel(category: category))
     }
 
     var body: some View {
@@ -98,7 +88,7 @@ extension QuestionsView {
 
                 Spacer()
 
-                Text("\(currentIndex + 1)/\(questions.count)")
+                Text("\(vm.currentIndex + 1)/\(vm.questions.count)")
                     .font(.system(size: 15, weight: .medium))
                     .foregroundColor(.gray)
             }
@@ -120,14 +110,14 @@ extension QuestionsView {
                             )
                         )
                         .frame(
-                            width: geo.size.width * progress,
+                            width: geo.size.width * vm.progress,
                             height: 8
                         )
                 }
             }
             .frame(height: 8)
 
-            Text("\(category.emoji) \(category.name)")
+            Text("\(vm.category.emoji) \(vm.category.name)")
                 .padding(8)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.white)
@@ -182,7 +172,7 @@ extension QuestionsView {
                     Text(emoji)
                         .font(.system(size: 70))
 
-                    Text(currentQuestion.text)
+                    Text(vm.currentQuestion?.text ?? "")
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -192,7 +182,7 @@ extension QuestionsView {
                 }
                 .padding(20)
 
-                Text("\(currentIndex + 1)")
+                Text("\(vm.currentIndex + 1)")
                     .font(.system(size: 120, weight: .black))
                     .foregroundColor(.white.opacity(0.04))
                     .padding(16)
@@ -220,7 +210,7 @@ extension QuestionsView {
 
                 Button {
 
-                    selectedReaction = reaction
+                    vm.selectReaction(reaction)
 
                 } label: {
 
@@ -236,7 +226,7 @@ extension QuestionsView {
                     .frame(maxWidth: .infinity)
                     .frame(height: 94)
                     .background(
-                        selectedReaction == reaction
+                        vm.selectedReaction == reaction
                         ? Color.purple.opacity(0.35)
                         : Color.white.opacity(0.05)
                     )
@@ -244,7 +234,7 @@ extension QuestionsView {
 
                         RoundedRectangle(cornerRadius: 24)
                             .stroke(
-                                selectedReaction == reaction
+                                vm.selectedReaction == reaction
                                 ? Color.purple
                                 : Color.white.opacity(0.06),
                                 lineWidth: 1.5
@@ -264,22 +254,16 @@ extension QuestionsView {
     var answerButton: some View {
 
         Button {
+            vm.isFinished
+            ? router.showResult(vm.results)
+            : vm.nextQuestion()
 
-            guard currentIndex < questions.count - 1 else {
-                return
-            }
-
-            withAnimation(.spring) {
-
-                currentIndex += 1
-                selectedReaction = nil
-            }
 
             emoji = ReactionType.randomEmoji
 
         } label: {
 
-            Text("Ответить ❤️")
+            Text(vm.isFinished ? "Узнать результат 🎰" : "Ответить ❤️")
                 .font(.system(size: 17, weight: .semibold))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
@@ -293,8 +277,8 @@ extension QuestionsView {
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 22))
         }
-        .disabled(selectedReaction == nil)
-        .opacity(selectedReaction == nil ? 0.5 : 1)
+        .disabled(vm.selectedReaction == nil)
+        .opacity(vm.selectedReaction == nil ? 0.5 : 1)
     }
 }
 

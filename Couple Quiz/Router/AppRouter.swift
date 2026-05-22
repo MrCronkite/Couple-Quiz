@@ -13,6 +13,7 @@ enum AppRoute {
     case paywall
     case homePage
     case questions(Category)
+    case result([ReactionType])
 }
 
 final class AppRouter: ObservableObject {
@@ -29,6 +30,10 @@ final class AppRouter: ObservableObject {
 
     func showQuestions(_ category: Category) {
         route = .questions(category)
+    }
+
+    func showResult(_ reactions: [ReactionType]) {
+        route = .result(reactions)
     }
 
 

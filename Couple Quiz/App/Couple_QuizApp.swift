@@ -29,6 +29,9 @@ struct Couple_QuizApp: App {
             case .questions(let category):
                 QuestionsView(category: category)
                     .environmentObject(router)
+            case .result(let reactions):
+                MatchResultView(reactions: reactions)
+                    .environmentObject(router)
             }
         }
     }
