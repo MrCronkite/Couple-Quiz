@@ -36,6 +36,14 @@ final class MatchResultViewModel: ObservableObject {
         reactions.count
     }
 
+    var total: Int { knewCount + surprisedCount + didntKnowCount }
+
+    var percent: Int {
+        guard total > 0 else { return 0 }
+        let score = (knewCount * 100) + (surprisedCount * 50)
+        return Int(Double(score) / Double(total * 100) * 100)
+    }
+
     // Процент совместимости
     // "Знал" = 100%, "Удивил" = 50%, "Не знал" = 0%
     var compatibilityPercent: Int {
