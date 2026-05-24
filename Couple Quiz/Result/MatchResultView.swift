@@ -20,8 +20,6 @@ struct MatchResultView: View {
     @State private var showContent: Bool = false
     @State private var confettiPieces: [ConfettiPiece] = []
 
-
-
     init(reactions: [ReactionType]) {
         _vm = StateObject(wrappedValue: MatchResultViewModel(reactions: reactions))
     }
@@ -180,7 +178,7 @@ struct MatchResultView: View {
 
     func startAnimations() {
         // Конфетти
-        confettiPieces = ConfettiPiece.generate(count: 28)
+        confettiPieces = ConfettiPiece.generate(count: 58)
 
         // Контент появляется
         withAnimation { showContent = true }
@@ -382,13 +380,17 @@ struct ConfettiView: View {
         }
         .ignoresSafeArea()
         .allowsHitTesting(false)
-        .onAppear { animate = true }
+        .onAppear {
+            DispatchQueue.main.async {
+                animate = true
+            }
+        }
     }
 }
 
-// AnyShape для Swift < 5.7
+
 struct AnyShape: Shape {
-    private let pathBuilder: (CGRect) -> Path
+    private let pathBuilder: @Sendable (CGRect) -> Path
     init<S: Shape>(_ shape: S) {
         pathBuilder = { rect in shape.path(in: rect) }
     }
