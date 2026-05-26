@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		845B22552FC600CB00AD7585 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 845B22542FC600CB00AD7585 /* SwiftyStoreKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		840B10FD2FB9C4D60084D4D9 /* Couple Quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Couple Quiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845B22552FC600CB00AD7585 /* SwiftyStoreKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +94,7 @@
 			);
 			name = "Couple Quiz";
 			packageProductDependencies = (
+				845B22542FC600CB00AD7585 /* SwiftyStoreKit */,
 			);
 			productName = "Couple Quiz";
 			productReference = 840B10FD2FB9C4D60084D4D9 /* Couple Quiz.app */;
@@ -118,6 +124,9 @@
 			);
 			mainGroup = 840B10F42FB9C4D60084D4D9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				845B22532FC600CB00AD7585 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 840B10FE2FB9C4D60084D4D9 /* Products */;
 			projectDirPath = "";
@@ -366,6 +375,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		845B22532FC600CB00AD7585 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.16.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		845B22542FC600CB00AD7585 /* SwiftyStoreKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 845B22532FC600CB00AD7585 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */;
+			productName = SwiftyStoreKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 840B10F52FB9C4D60084D4D9 /* Project object */;
 }
