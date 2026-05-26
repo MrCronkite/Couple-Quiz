@@ -16,6 +16,7 @@ struct PaywallView: View {
     @State private var selectedPlanIndex: Int = 1
 
     @EnvironmentObject var router: AppRouter
+    @StateObject private var vm: PaywallViewModel
 
     private let plans: [PlanOption] = [
         PlanOption(
@@ -55,6 +56,10 @@ struct PaywallView: View {
             accentColor: Color(hex: "#FFD166")
         )
     ]
+
+    init() {
+        _vm = StateObject(wrappedValue: PaywallViewModel())
+    }
 
     var body: some View {
         ZStack {
