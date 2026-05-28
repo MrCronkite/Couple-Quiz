@@ -38,6 +38,7 @@ enum StorageKey: String {
     case refreshToken
     case user
     case appTheme
+    case isPremium 
 }
 
 // MARK: - Implementation

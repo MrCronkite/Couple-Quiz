@@ -29,9 +29,11 @@ protocol PurchaseManager {
 final class PurchaseManagerImpl: PurchaseManager {
 
     private let sharedSecret = ""
-    //private let storage = UserSettingsImpl()
+    private let storage: StorageManager
 
-    private init() {}
+    private init() {
+        storage = StorageManagerImpl()
+    }
 
 }
 
@@ -99,7 +101,7 @@ extension PurchaseManagerImpl {
 
                 case .success(let purchase):
 
-                    //storage.setPremium(true, forKey: .keyPremium)
+                    storage.set(true, forKey: .isPremium)
 
                     continuation.resume()
 
@@ -134,7 +136,7 @@ extension PurchaseManagerImpl {
 
                 } else if results.restoredPurchases.count > 0 {
 
-                    //storage.setPremium(true, forKey: .keyPremium)
+                    storage.set(true, forKey: .isPremium)
 
                     continuation.resume()
 
