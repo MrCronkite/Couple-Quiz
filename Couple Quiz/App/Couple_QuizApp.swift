@@ -11,10 +11,15 @@ import SwiftUI
 struct Couple_QuizApp: App {
 
     @StateObject private var router = AppRouter()
+    private let pm: PurchaseManager
+
+    init() {
+        pm = PurchaseManagerImpl()
+        pm.completeTransactions()
+    }
 
     var body: some Scene {
 
-        
         WindowGroup {
             switch router.route {
             case .paywall:

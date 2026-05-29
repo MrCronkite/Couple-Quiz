@@ -31,10 +31,9 @@ final class PurchaseManagerImpl: PurchaseManager {
     private let sharedSecret = ""
     private let storage: StorageManager
 
-    private init() {
+    init() {
         storage = StorageManagerImpl()
     }
-
 }
 
 extension PurchaseManagerImpl {
