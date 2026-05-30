@@ -63,10 +63,8 @@ struct PaywallView: View {
 
     var body: some View {
         ZStack {
-            // ── Background ──────────────────────────────────────────────────
             Color.cBg.ignoresSafeArea()
 
-            // Gold glow top
             RadialGradient(
                 colors: [Color.cGold.opacity(0.14), Color.cGold2.opacity(0.06), .clear],
                 center: .init(x: 0.5, y: 0.1),
@@ -75,7 +73,6 @@ struct PaywallView: View {
             )
             .ignoresSafeArea()
 
-            // Purple glow bottom
             RadialGradient(
                 colors: [Color.cAccent3.opacity(0.08), .clear],
                 center: .bottom,
@@ -84,16 +81,13 @@ struct PaywallView: View {
             )
             .ignoresSafeArea()
 
-            // ── Content ─────────────────────────────────────────────────────
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
 
-                    // ── Hero ─────────────────────────────────────────────────
                     VStack(spacing: 0) {
                         OrbitingCrown()
                             .padding(.top, 22)
 
-                        // Premium badge
                         Text("✦ Premium")
                             .font(.system(size: 14, weight: .bold))
                             .tracking(1.2)
@@ -111,7 +105,6 @@ struct PaywallView: View {
                             .shadow(color: Color.cGold2.opacity(0.3), radius: 8, y: 3)
                             .padding(.top, 14)
 
-                        // Title
                         Group {
                             Text("Откройте всё\nсамое ")
                                 .font(.system(size: 26, weight: .black, design: .serif))
@@ -132,7 +125,6 @@ struct PaywallView: View {
 
                     Spacer()
 
-                    // ── Features ─────────────────────────────────────────────
                     VStack(spacing: 6) {
                         ForEach(features) { item in
                             FeatureRow(item: item)
@@ -144,7 +136,6 @@ struct PaywallView: View {
 
                     Spacer()
 
-                    // ── Divider ───────────────────────────────────────────────
                     HStack(spacing: 10) {
                         dividerLine
                         Text("Выберите план")
@@ -157,7 +148,6 @@ struct PaywallView: View {
                     .padding(.horizontal, 18)
                     .padding(.top, 18)
 
-                    // ── Plans ─────────────────────────────────────────────────
                     HStack(spacing: 7) {
                         ForEach(plans.indices, id: \.self) { i in
                             PlanCard(plan: plans[i], isSelected: selectedPlanIndex == i)
@@ -171,7 +161,6 @@ struct PaywallView: View {
                     .padding(.horizontal, 18)
                     .padding(.top, 16)
 
-                    // ── CTA ───────────────────────────────────────────────────
                     VStack(spacing: 8) {
                         ShimmerCTAButton(title: "Начать бесплатно на 3 дня ✦")
 
@@ -187,7 +176,6 @@ struct PaywallView: View {
                     .padding(.horizontal, 18)
                     .padding(.top, 14)
 
-                    // ── Footer links ──────────────────────────────────────────
                     HStack(spacing: 4) {
                         footerLink("Восстановить покупку")
                         footerDot
@@ -200,7 +188,6 @@ struct PaywallView: View {
                 }
             }
 
-            // ── Close button ─────────────────────────────────────────────────
             VStack {
                 HStack {
                     Spacer()
@@ -233,8 +220,6 @@ struct PaywallView: View {
         }
     }
 
-    // ── Helpers
-
     private var dividerLine: some View {
         Rectangle()
             .fill(
@@ -261,8 +246,6 @@ struct PaywallView: View {
             .frame(width: 2, height: 2)
     }
 }
-
-// MARK: - Preview
 
 #Preview {
     PaywallView()

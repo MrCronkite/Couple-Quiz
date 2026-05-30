@@ -20,7 +20,6 @@ struct ShimmerCTAButton: View {
                 endPoint: .bottomTrailing
             )
 
-            // Shimmer sweep
             GeometryReader { geo in
                 Rectangle()
                     .fill(
