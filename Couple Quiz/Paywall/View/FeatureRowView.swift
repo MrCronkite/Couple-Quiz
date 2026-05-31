@@ -13,20 +13,17 @@ struct FeatureRow: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            // Accent left bar
             Rectangle()
                 .fill(item.accentColor)
                 .frame(width: 2)
                 .cornerRadius(1)
 
-            // Icon
             Text(item.emoji)
                 .font(.system(size: 15))
                 .frame(width: 32, height: 32)
                 .background(item.accentColor.opacity(0.12))
                 .cornerRadius(9)
 
-            // Text
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.name)
                     .font(.system(size: 11, weight: .semibold))
@@ -38,7 +35,6 @@ struct FeatureRow: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            // Check
             Text("✓")
                 .font(.system(size: 9, weight: .bold))
                 .foregroundColor(Color.cGreen)

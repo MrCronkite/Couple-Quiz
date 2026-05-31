@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct OrbitingCrown: View {
     @State private var ring1Angle: Double = 0
     @State private var ring2Angle: Double = 0
@@ -15,7 +14,6 @@ struct OrbitingCrown: View {
 
     var body: some View {
         ZStack {
-            // Outer ring
             Circle()
                 .stroke(Color.cGold.opacity(0.18), lineWidth: 1)
                 .frame(width: 88, height: 88)
@@ -29,13 +27,11 @@ struct OrbitingCrown: View {
                 )
                 .rotationEffect(.degrees(ring1Angle))
 
-            // Inner ring
             Circle()
                 .stroke(Color.cGold.opacity(0.12), lineWidth: 1)
                 .frame(width: 70, height: 70)
                 .rotationEffect(.degrees(ring2Angle))
 
-            // Crown emoji
             Text("👑")
                 .font(.system(size: 40))
                 .shadow(color: Color.cGold.opacity(0.7), radius: 10)

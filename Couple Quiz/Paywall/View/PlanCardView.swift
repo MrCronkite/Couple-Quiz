@@ -15,23 +15,19 @@ struct PlanCard: View {
     var body: some View {
         ZStack(alignment: .top) {
             VStack(spacing: 2) {
-                // Period label (extra top space if badge exists)
                 Text(plan.period)
                     .font(.system(size: 8.5))
                     .foregroundColor(Color.cText2)
                     .padding(.top, plan.badge != nil ? 10 : 4)
 
-                // Price
                 Text(plan.price)
                     .font(.system(size: 17, weight: .bold, design: .serif))
                     .foregroundColor(isSelected ? Color.cGold : Color.cText)
 
-                // Per label
                 Text(plan.perLabel)
                     .font(.system(size: 8, weight: .light))
                     .foregroundColor(Color.cText3)
 
-                // Saving badge
                 if let saving = plan.saving {
                     Text(saving)
                         .font(.system(size: 7.5, weight: .semibold))
@@ -63,7 +59,6 @@ struct PlanCard: View {
                 radius: 12, y: 4
             )
 
-            // Top badge
             if let badge = plan.badge {
                 Text(badge)
                     .font(.system(size: 7.5, weight: .bold))
